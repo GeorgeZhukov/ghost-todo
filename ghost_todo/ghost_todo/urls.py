@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django.contrib.auth.models import User
+
 from rest_framework import routers, serializers, viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken import views
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,6 +32,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -40,4 +47,5 @@ urlpatterns = [
 
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token),
 ]

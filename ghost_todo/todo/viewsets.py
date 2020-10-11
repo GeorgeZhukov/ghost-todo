@@ -10,6 +10,7 @@ from .serializers import UserSerializer, ProjectSerializer
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
+    
     # authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [AllowAny]
     queryset = User.objects.all()

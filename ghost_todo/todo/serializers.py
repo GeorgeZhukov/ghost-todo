@@ -7,6 +7,7 @@ from .models import Project
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = User
         fields = ['username', 'password']

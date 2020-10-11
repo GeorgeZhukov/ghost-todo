@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '%9fyu(s*hcxw8vbnbt%+hy+-&f@dv1vv5a3(h!%10^(cmd-v=%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,6 +82,21 @@ WSGI_APPLICATION = 'ghost_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+#         'NAME': 'ghost_todo',
+
+#         'USER': 'postgres',
+
+#         'PASSWORD': 'postpass',
+
+#         'HOST': '127.0.0.1',
+
+#     }
+# }
 DATABASES = {
     'default': {
 
@@ -90,9 +106,9 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': 'postpass',
+        'PASSWORD': 'postgres',
 
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
 
     }
 }
@@ -155,3 +171,4 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+django_heroku.settings(locals())

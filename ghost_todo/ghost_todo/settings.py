@@ -82,21 +82,7 @@ WSGI_APPLICATION = 'ghost_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
 
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-#         'NAME': 'ghost_todo',
-
-#         'USER': 'postgres',
-
-#         'PASSWORD': 'postpass',
-
-#         'HOST': '127.0.0.1',
-
-#     }
-# }
 DATABASES = {
     'default': {
 
@@ -106,9 +92,9 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'postpass',
 
-        'HOST': 'db',
+        'HOST': '127.0.0.1',
 
     }
 }

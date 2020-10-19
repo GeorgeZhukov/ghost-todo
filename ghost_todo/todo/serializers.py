@@ -5,9 +5,7 @@ from rest_framework import serializers
 from .models import Project
 
 
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password']
@@ -21,7 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 # Serializers define the API representation.
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'owner', 'name', 'created_at']

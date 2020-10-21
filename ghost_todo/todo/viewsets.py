@@ -5,6 +5,8 @@ from rest_framework import routers, serializers, viewsets
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authtoken import views
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .models import Project, Task
 from .serializers import UserSerializer, ProjectSerializer, TaskSerializer
@@ -19,6 +21,13 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = User.objects.all()
         return queryset.filter(id=self.request.user.id)
+
+    @action(detail=False)
+    def current_user(self, request):
+        current_user = self.request.user
+
+        serializer = self.get_serializer(current_user, many=False)
+        return Response(serializer.data)
 
 # ViewSets define the view behavior.
 class ProjectViewSet(viewsets.ModelViewSet):

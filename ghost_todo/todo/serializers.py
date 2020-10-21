@@ -2,13 +2,21 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import Project, Task
+from .models import Project, Task, UserProfile
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['avatar']
 
 
 class UserSerializer(serializers.ModelSerializer):
+    userprofile = UserProfileSerializer(read_only=True)
+
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'password', 'userprofile']
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -16,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
 
 
 # Serializers define the API representation.

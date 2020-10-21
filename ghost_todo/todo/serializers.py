@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import Project
+from .models import Project, Task
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,4 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ['id', 'owner', 'name', 'created_at']
+        fields = ['url', 'id', 'owner', 'name', 'created_at']
+        read_only_fields = ['owner']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+
+        return user.projects.create(**validated_data)
+
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Task
+        fields = [ 'id', 'name', 'created_at', 'project']

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from todo.models import Project
+from .models import Project, Task
 
 # Register your models here.
 
@@ -10,4 +10,7 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-
+@admin.register(Task)
+class TaskAdmin(admin.ModelAdmin):
+  list_filter = ('project', 'project__owner', )
+  search_fields = ('name',)

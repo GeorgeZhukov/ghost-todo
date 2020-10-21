@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Project, Task
+from .models import Project, Task, UserProfile
 
 # Register your models here.
 
@@ -14,3 +14,8 @@ class ProjectAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
   list_filter = ('project', 'project__owner', )
   search_fields = ('name',)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+  pass

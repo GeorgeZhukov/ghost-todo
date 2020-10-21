@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 # Serializers define the API representation.
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'owner', 'name', 'created_at']

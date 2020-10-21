@@ -8,7 +8,6 @@ from rest_framework.authtoken.models import Token
 # Create your models here
 
 
-
 class Project(models.Model):
   owner = models.ForeignKey(User, on_delete=models.RESTRICT)
   name = models.TextField()

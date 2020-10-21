@@ -11,21 +11,22 @@ from .serializers import ProjectSerializer, UserSerializer
 # ViewSets define the view behavior.
 
 class UserViewSet(viewsets.ModelViewSet):
-    
+
     permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+
     def get_queryset(self):
         queryset = User.objects.all()
         return queryset.filter(id=self.request.user.id)
 
 # ViewSets define the view behavior.
 class ProjectViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Project.objects.all().order_by('-created_at')
     serializer_class = ProjectSerializer
 
-    
+
 
 
